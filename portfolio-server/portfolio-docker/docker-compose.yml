@@ -1,0 +1,53 @@
+version: '3'
+
+#Pour spécifier àl'application courante, remplacer tout les default parlenom de l'application
+volumes:
+  portfolio_data:
+      driver: local
+
+services:
+  postgres:
+      container_name: portfolio-db
+      image: postgres
+      volumes:
+        - ./db/data:/var/lib/postgresql/data
+        - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+        #TODO creer fichier sql qui creer user keycloak et table + normal
+      environment:
+        POSTGRES_PASSWORD: pa55w0rd
+      ports:
+        - "5432:5432"
+      command:
+        [
+            "-c",
+            "shared_buffers=256MB",
+            "-c",
+            "max_connections=200"
+        ]
+  keycloak:
+      image: jboss/keycloak:16.1.0
+      container_name: portfolio-keycloak
+      restart: "no"
+      command:
+        - "-b 0.0.0.0 -Dkeycloak.migration.strategy=IGNORE_EXISTING
+              -Dkeycloak.migration.action=import
+              -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/import/portfolio-realm.json
+              -Dkeycloak.profile.feature.upload_scripts=enabled"
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: postgres
+        DB_DATABASE: keycloak_db
+        DB_USER: keycloak_user
+        DB_SCHEMA: public
+        DB_PASSWORD: keycloak_pwd
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: password
+        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+        #JDBC_PARAMS: "ssl=true"
+      ports:
+        - "9001:8080"
+      volumes:
+        - ./imports:/import
+      depends_on:
+        - postgres
+

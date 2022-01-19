@@ -1,0 +1,10 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <ng-container *ngIf="$user | async as user">
+    <span> {{ 'app.welcome' | transloco }} {{ user.username }}</span>
+  </ng-container>
+  <button mat-button color="primary" (click)="logout()">{{ 'app.logout' | transloco }}</button>
+
+</mat-toolbar>

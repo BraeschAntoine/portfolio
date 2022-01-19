@@ -1,0 +1,6 @@
+{
+  "app": {
+    "welcome": "Bonjour",
+    "logout": "Se déconnecter"
+  }
+}
