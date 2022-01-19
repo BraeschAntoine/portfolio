@@ -13,46 +13,47 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Transactional
 public abstract class AbstractIdentifierService<MODEL extends AbstractIdentifier, REPOSITORY extends IAbstractIdentifierRepository<MODEL>>
-        extends AbstractService<MODEL, Long, REPOSITORY>
+        extends AbstractService<MODEL, UUID, REPOSITORY>
         implements IAbstractIdentifierService<MODEL> {
 
 
-    public List<MODEL> findAllByUuids(final Set<String> pUuids) throws CustomException{
+    public List<MODEL> findAllByUuids(final Set<UUID> pUuids) throws CustomException{
         if(pUuids.isEmpty()){
             throw new CustomException(ErrorEnum.LIST_EMPTY);
         }
-        return this.repository.findAllByUuidIn(pUuids);
+        return this.repository.findAllByIdIn(pUuids);
     }
 
-    public MODEL findByUuid(final String pUuid){
-        return repository.findByUuid(pUuid);
+    public MODEL findByUuid(final UUID pUuid){
+        return repository.findById(pUuid).orElse(null);
     }
 
-    public void deleteAllByUuid(final Set<String> pUuids){
+    public void deleteAllByUuid(final Set<UUID> pUuids){
 
     }
 
     @Override
     public MODEL create(MODEL pModel) throws CustomException {
-        if(StringUtils.isBlank(pModel.getUuid())) {
-            pModel.setUuid(IdentifierUtils.generateUUID());
+        if(StringUtils.isBlank(pModel.getId().toString())) {
+            pModel.setId(IdentifierUtils.generateUUID());
         }
         return super.create(pModel);
     }
 
     @Override
     public MODEL update(MODEL pModel) throws CustomException {
-        if(StringUtils.isBlank(pModel.getUuid()) || ObjectUtils.isEmpty(pModel)){
+        if(StringUtils.isBlank(pModel.getId().toString()) || ObjectUtils.isEmpty(pModel)){
             throw new CustomException(ErrorEnum.SAVING_NULL);
         }
-        MODEL dbModel = repository.findByUuid(pModel.getUuid());
+        MODEL dbModel = repository.findById(pModel.getId()).orElse(null);
         if(ObjectUtils.isEmpty(dbModel)){
             throw new CustomException(ErrorEnum.NOT_IN_DB);
         }
-        pModel.setIdentifier(dbModel.getIdentifier());
+        pModel.setId(dbModel.getId());
         return super.update(pModel);
     }
 
@@ -63,7 +64,7 @@ public abstract class AbstractIdentifierService<MODEL extends AbstractIdentifier
         }
         List<MODEL> response= new ArrayList<>();
         for(MODEL model : pModels) {
-            if(StringUtils.isBlank(model.getUuid())) {
+            if(StringUtils.isBlank(model.getId().toString())) {
                 response.add(create(model));
             } else {
                 response.add(update(model));
@@ -74,15 +75,15 @@ public abstract class AbstractIdentifierService<MODEL extends AbstractIdentifier
 
 
     @Override
-    public void delete(final String pUuid) throws CustomException{
-        if(StringUtils.isBlank(pUuid)) {
+    public void delete(final UUID pUuid) throws CustomException{
+        if(StringUtils.isBlank(pUuid.toString())) {
             throw new CustomException(ErrorEnum.NO_UUID_PROVIDED);
         }
-        MODEL dbModel = repository.findByUuid(pUuid);
+        MODEL dbModel = repository.findById(pUuid).orElse(null);
         if(ObjectUtils.isEmpty(dbModel)) {
             throw new CustomException(ErrorEnum.NOT_IN_DB);
         }
         beforeDelete(dbModel);
-        repository.deleteByUuid(pUuid);
+        repository.deleteById(pUuid);
     }
 }

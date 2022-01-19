@@ -1,6 +1,8 @@
 package com.vimaire.portfolio.models.generic;
 
+import java.util.UUID;
+
 public class AbstractFilter {
 
-    public String uuid;
+    public UUID id;
 }

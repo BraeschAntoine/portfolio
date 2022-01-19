@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IAbstractIdentifierCrud<DTO extends AbstractIdentifierDto> {
 
@@ -21,13 +22,13 @@ public interface IAbstractIdentifierCrud<DTO extends AbstractIdentifierDto> {
     ResponseEntity<List<DTO>> findAll();
 
     @GetMapping("/{id}")
-    ResponseEntity<DTO> get(@PathVariable("id") final String pUuid);
+    ResponseEntity<DTO> get(@PathVariable("id") final UUID pUuid);
 
     @PutMapping
     ResponseEntity<DTO> update(@RequestBody final DTO pRequest) throws CustomException;
 
     @DeleteMapping("/{id}")
-    void delete(@PathVariable final String pUuid) throws CustomException;
+    void delete(@PathVariable final UUID pUuid) throws CustomException;
 
     @PostMapping("/all")
     ResponseEntity<List<DTO>> save(@RequestBody final List<DTO> pDtoList) throws CustomException;

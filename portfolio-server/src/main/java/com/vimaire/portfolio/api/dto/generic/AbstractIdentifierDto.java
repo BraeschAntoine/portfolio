@@ -5,13 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class AbstractIdentifierDto implements Serializable {
 
-    public Long identifier;
+    public UUID id;
 
-    public String uuid;
 }

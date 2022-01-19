@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.io.Serializable;
+import java.util.UUID;
 
 @MappedSuperclass
 @Getter
@@ -24,22 +26,21 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(exclude = {"identifier"})
 public abstract class AbstractIdentifier implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false, unique = true)
-    private Long identifier;
-
-    @Column(name = "uuid", nullable = false, updatable = false, unique = true)
-    private String uuid;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false, unique = true)
+    private UUID id;
 
     @PrePersist
     @PreUpdate
     public void onCreateOrUpdate(){
-        if(StringUtils.isBlank(uuid)) {
-            setUuid(IdentifierUtils.generateUUID());
+        if(StringUtils.isBlank(id.toString())) {
+            setId(IdentifierUtils.generateUUID());
         }
     }
 

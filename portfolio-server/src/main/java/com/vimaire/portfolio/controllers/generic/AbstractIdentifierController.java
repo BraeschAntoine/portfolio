@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 public abstract class AbstractIdentifierController<DTO extends AbstractIdentifierDto, MODEL extends AbstractIdentifier, SERVICE extends IAbstractIdentifierService<MODEL>, MAPPER extends BaseMapper<MODEL, DTO>>
@@ -33,8 +34,6 @@ public abstract class AbstractIdentifierController<DTO extends AbstractIdentifie
                 HttpStatus.CREATED);
     }
 
-
-
     @Override
     public ResponseEntity<List<DTO>> findAll() {
         return new ResponseEntity<>(mapper.modelListToDtoList(service.findAll()
@@ -42,7 +41,7 @@ public abstract class AbstractIdentifierController<DTO extends AbstractIdentifie
     }
 
     @Override
-    public ResponseEntity<DTO> get(String pUuid){
+    public ResponseEntity<DTO> get(UUID pUuid){
         return new ResponseEntity<>(mapper.modelToDto(service.findByUuid(pUuid)), HttpStatus.OK);
     }
 
@@ -54,7 +53,7 @@ public abstract class AbstractIdentifierController<DTO extends AbstractIdentifie
     }
 
     @Override
-    public void delete(@RequestParam(name = "uuid") String pUuid) throws CustomException {
+    public void delete(@RequestParam(name = "uuid") UUID pUuid) throws CustomException {
         service.delete(pUuid);
     }
 

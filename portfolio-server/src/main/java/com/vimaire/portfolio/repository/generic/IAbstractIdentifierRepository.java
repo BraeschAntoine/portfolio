@@ -5,13 +5,11 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @NoRepositoryBean
-public interface IAbstractIdentifierRepository<MODEL extends AbstractIdentifier> extends  IAbstractRepository<MODEL, Long>{
+public interface IAbstractIdentifierRepository<MODEL extends AbstractIdentifier> extends  IAbstractRepository<MODEL, UUID>{
 
-    List<MODEL> findAllByUuidIn(final Set<String> pUuids);
+    List<MODEL> findAllByIdIn(final Set<UUID> pUuids);
 
-    MODEL findByUuid(final String pUuid);
-
-    void deleteByUuid(final String pUuid);
 }
