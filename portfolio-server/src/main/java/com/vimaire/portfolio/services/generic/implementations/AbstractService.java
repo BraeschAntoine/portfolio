@@ -23,6 +23,8 @@ public abstract class AbstractService<MODEL extends AbstractIdentifier, ID exten
 
     protected abstract void beforeDelete(MODEL pModel);
 
+    protected Boolean canRead() { return true;}
+
 
     public MODEL get(ID pId) {
         return this.repository.getById(pId);

@@ -1,0 +1,28 @@
+## Database
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/portfolio_db
+    username: portfolio_user
+    password: admin
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    user: portfolio_user
+    password: admin
+    schemas: portfolio_db
+    url: jdbc:postgresql://localhost:5432/portfolio_db
+    locations: classpath:db/migration
+
+
+keycloak:
+  auth-server-url: http://localhost:9001/auth
+  realm: Portfolio
+  resource: portfolio_client
+  bearer-only: true
+  credentials:
+    secret: 3frVhujuh3ywX5Djmq1jsMtDNbUXDQa5
+
+admin:
+  client:
+    client-id: realm-manager
+    client-secret: Y4pFC52eDEtStMLPMSbgzImHjYo4PNOt
