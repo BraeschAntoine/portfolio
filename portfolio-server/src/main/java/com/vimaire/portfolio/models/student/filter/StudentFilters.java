@@ -1,7 +1,8 @@
-package com.vimaire.portfolio.models.student;
+package com.vimaire.portfolio.models.student.filter;
 
 import com.vimaire.portfolio.models.generic.AbstractFilters;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.vimaire.portfolio.models.student.QStudent;
 
 public class StudentFilters extends AbstractFilters {
 

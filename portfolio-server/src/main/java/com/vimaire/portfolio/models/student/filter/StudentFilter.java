@@ -1,4 +1,4 @@
-package com.vimaire.portfolio.models.student;
+package com.vimaire.portfolio.models.student.filter;
 
 import com.vimaire.portfolio.models.generic.AbstractFilter;
 

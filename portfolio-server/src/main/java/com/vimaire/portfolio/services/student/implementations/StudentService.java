@@ -1,8 +1,8 @@
 package com.vimaire.portfolio.services.student.implementations;
 
 import com.vimaire.portfolio.models.student.Student;
-import com.vimaire.portfolio.models.student.StudentFilter;
-import com.vimaire.portfolio.models.student.StudentFilters;
+import com.vimaire.portfolio.models.student.filter.StudentFilter;
+import com.vimaire.portfolio.models.student.filter.StudentFilters;
 import com.vimaire.portfolio.repository.student.IStudentRepository;
 import com.vimaire.portfolio.services.generic.implementations.AbstractIdentifierFilterService;
 import com.vimaire.portfolio.services.student.interfaces.IStudService;

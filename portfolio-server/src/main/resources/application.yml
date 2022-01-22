@@ -9,9 +9,9 @@ spring:
   flyway:
     user: portfolio_user
     password: admin
-    schemas: portfolio_db
     url: jdbc:postgresql://localhost:5432/portfolio_db
     locations: classpath:db/migration
+    schemas: public
 
 
 keycloak:
