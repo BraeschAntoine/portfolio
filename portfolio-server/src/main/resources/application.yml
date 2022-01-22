@@ -21,6 +21,7 @@ keycloak:
   bearer-only: true
   credentials:
     secret: 3frVhujuh3ywX5Djmq1jsMtDNbUXDQa5
+  principal-attribute: username
 
 admin:
   client:
