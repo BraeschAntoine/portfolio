@@ -36,7 +36,7 @@ public class Project extends AbstractIdentifier {
             inverseJoinColumns = @JoinColumn(name = "technology_id"))
     private Set<Technology> technologies;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany
     private Set<Image> images;
 
     @ManyToOne

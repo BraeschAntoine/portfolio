@@ -26,7 +26,4 @@ public class Image extends AbstractIdentifier {
     @Column()
     private String path;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
 }
