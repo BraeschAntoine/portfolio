@@ -8,7 +8,9 @@ import com.vimaire.portfolio.mappers.UserMapper;
 import com.vimaire.portfolio.models.User;
 import com.vimaire.portfolio.models.filter.UserFilter;
 import com.vimaire.portfolio.services.implementations.UserService;
+import com.vimaire.portfolio.utils.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContext;
@@ -27,6 +29,12 @@ public class UserController
     //@PreAuthorize("hasRole('admin')") au choix, si je veux utiliser juste le nom du role ou le prefix + role
     @Secured({"ROLE_user"})
     public Object test() {
-        return "coucou";
+        return user;
+    }
+
+    @Override
+    @Secured({"ROLE_admin"})
+    public ResponseEntity<UserDto> create(UserDto pRequest) throws CustomException {
+        return super.create(pRequest);
     }
 }

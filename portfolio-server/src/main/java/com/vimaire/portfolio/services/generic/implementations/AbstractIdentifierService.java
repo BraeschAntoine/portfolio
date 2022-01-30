@@ -38,9 +38,6 @@ public abstract class AbstractIdentifierService<MODEL extends AbstractIdentifier
 
     @Override
     public MODEL create(MODEL pModel) throws CustomException {
-        if(StringUtils.isBlank(pModel.getId().toString())) {
-            pModel.setId(IdentifierUtils.generateUUID());
-        }
         return super.create(pModel);
     }
 

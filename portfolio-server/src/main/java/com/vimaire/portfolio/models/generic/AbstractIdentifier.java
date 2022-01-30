@@ -39,7 +39,7 @@ public abstract class AbstractIdentifier implements Serializable {
     @PrePersist
     @PreUpdate
     public void onCreateOrUpdate(){
-        if(StringUtils.isBlank(id.toString())) {
+        if(id == null) {
             setId(IdentifierUtils.generateUUID());
         }
     }
