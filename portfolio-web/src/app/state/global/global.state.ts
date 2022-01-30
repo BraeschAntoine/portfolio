@@ -5,7 +5,7 @@ import { KeycloakProfile } from "keycloak-js";
 import { LoadUser, Logout, ToggleNavbar } from "./global.actions";
 import { Navigate } from "@ngxs/router-plugin";
 
-interface GlobalStateModel {
+export interface GlobalStateModel {
   navbarVisible: boolean;
   user: KeycloakProfile | null
 }
@@ -26,10 +26,6 @@ export class GlobalState {
   constructor(private keycloakService: KeycloakService) {
   }
 
-  @Selector()
-  static user(state: GlobalStateModel) {
-    return state.user;
-  }
 
   @Action(ToggleNavbar)
   toogleNavbar(ctx: StateContext<GlobalStateModel>) {

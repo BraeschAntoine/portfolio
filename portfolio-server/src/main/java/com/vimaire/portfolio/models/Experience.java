@@ -1,9 +1,6 @@
-package com.vimaire.portfolio.models.experience;
+package com.vimaire.portfolio.models;
 
-import com.vimaire.portfolio.models.company.Company;
 import com.vimaire.portfolio.models.generic.AbstractIdentifier;
-import com.vimaire.portfolio.models.technology.Technology;
-import com.vimaire.portfolio.models.user.User;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
 import { NgxsModule } from "@ngxs/store";
 import { NgxsRouterPluginModule } from "@ngxs/router-plugin";
-import { GlobalState } from "./state/global.state";
+import { GlobalState } from "./state/global/global.state";
 import { environment } from "../environments/environment";
 import { AnonymousComponent } from './features/anonymous/anonymous/anonymous.component';
 import { AdminComponent } from './features/admin/admin/admin.component';

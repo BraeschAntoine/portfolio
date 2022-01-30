@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from "@ngxs/store";
-import { LoadUser, Logout } from "../../../state/global.actions";
+import { LoadUser, Logout } from "../../../state/global/global.actions";
 import { Observable } from "rxjs";
 import { KeycloakProfile } from "keycloak-js";
-import { GlobalState } from "../../../state/global.state";
+import { GlobalState } from "../../../state/global/global.state";
+import { GlobalSelectors } from "../../../state/global/global.selectors";
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +13,7 @@ import { GlobalState } from "../../../state/global.state";
 })
 export class AdminComponent implements OnInit {
 
-  @Select(GlobalState.user) $user: Observable<KeycloakProfile>;
+  @Select(GlobalSelectors.user) $user: Observable<KeycloakProfile>;
 
   constructor(private store: Store) { }
 

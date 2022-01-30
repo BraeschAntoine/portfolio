@@ -1,4 +1,4 @@
-package com.vimaire.portfolio.models.technology;
+package com.vimaire.portfolio.models;
 
 public enum TechnologyTypeEnum {
 

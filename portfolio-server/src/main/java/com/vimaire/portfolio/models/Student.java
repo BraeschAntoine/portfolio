@@ -1,4 +1,4 @@
-package com.vimaire.portfolio.models.student;
+package com.vimaire.portfolio.models;
 
 import com.vimaire.portfolio.models.generic.AbstractIdentifier;
 import lombok.Getter;
