@@ -28,6 +28,15 @@ public class AuthenticatedUserImpl implements AuthenticatedUser{
     }
 
     @Override
+    public String getEmail() {
+        KeycloakPrincipal keycloakPrincipal = getPrincipal();
+        if(keycloakPrincipal == null){
+            return null;
+        }
+        return keycloakPrincipal.getKeycloakSecurityContext().getToken().getPreferredUsername();
+    }
+
+    @Override
     public Set<String> getRoles() {
         KeycloakPrincipal keycloakPrincipal = getPrincipal();
         if(keycloakPrincipal == null){

@@ -22,6 +22,7 @@ keycloak:
   credentials:
     secret: 3frVhujuh3ywX5Djmq1jsMtDNbUXDQa5
   principal-attribute: username
+  use-resource-role-mappings: true
 
 admin:
   client:

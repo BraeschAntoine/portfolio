@@ -10,6 +10,8 @@ public interface AuthenticatedUser {
 
     String getUserUuid();
 
+    String getEmail();
+
     Set<String> getRoles();
 
     Boolean hasRole(String role);
