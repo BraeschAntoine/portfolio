@@ -25,8 +25,8 @@ public class UserController
     @Override
     //@PreAuthorize("hasRole('admin')") au choix, si je veux utiliser juste le nom du role ou le prefix + role
     @Secured({"ROLE_user"})
-    public Object test() {
-        return user;
+    public UserDto getConnectedUser() {
+        return mapper.modelToDto(service.getConnectedUser());
     }
 
     @Override

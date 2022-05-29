@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public interface UserApi extends IAbstractIdentifierFilterCrud<UserDto, UserFilter> {
 
-    @GetMapping("/test")
-    Object test();
+    @GetMapping("/me")
+    UserDto getConnectedUser();
 }

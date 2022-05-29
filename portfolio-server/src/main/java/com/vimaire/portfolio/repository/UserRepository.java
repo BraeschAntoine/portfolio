@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends IAbstractIdentifierFilterRepository<User> {
+
+    User findByEmail(String email);
 }

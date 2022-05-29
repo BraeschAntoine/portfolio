@@ -1,12 +1,14 @@
 package com.vimaire.portfolio.services.implementations;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.vimaire.portfolio.config.AuthenticatedUser;
 import com.vimaire.portfolio.models.User;
 import com.vimaire.portfolio.models.filter.UserFilter;
 import com.vimaire.portfolio.repository.UserRepository;
 import com.vimaire.portfolio.services.generic.implementations.AbstractIdentifierFilterService;
 import com.vimaire.portfolio.services.interfaces.IUserService;
 import com.vimaire.portfolio.utils.exception.CustomException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,9 @@ import java.util.List;
 public class UserService
         extends AbstractIdentifierFilterService<User, UserFilter, UserRepository>
         implements IUserService {
+
+    @Autowired
+    AuthenticatedUser currentUser;
 
     @Override
     public List<BooleanExpression> findAllFilter() {
@@ -40,4 +45,9 @@ public class UserService
     protected void beforeDelete(User pModel) {
 
     }
+
+    public User getConnectedUser(){
+        return repository.findByEmail(currentUser.getEmail());
+    }
+
 }
